@@ -34,3 +34,11 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Question
+
+- Why there are yellow highlights in globals.css -> They may be warnings and not cause issues
+- How are the styles applied in the code?
+- Technically, ClerkMiddleware doesn't protect any routes by default, let's see if that's true
+- ~~How to set URL for SignIn, SignUp, After SignIn, After SignUp -> Verify~~
+- ~~How to set the User Button?~~
