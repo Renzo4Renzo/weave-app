@@ -37,8 +37,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Question
 
-- Why there are yellow highlights in globals.css -> They may be warnings and not cause issues
+- ~~Why there are yellow highlights in globals.css -> They may be warnings and not cause issues~~
 - How are the styles applied in the code?
 - Technically, ClerkMiddleware doesn't protect any routes by default, let's see if that's true
 - ~~How to set URL for SignIn, SignUp, After SignIn, After SignUp -> Verify~~
 - ~~How to set the User Button?~~
+- Try Tailwind 4.1 and see if it breaks
+- Refactor: Have only one metadata
+- Create our own Weave icon
+- Who provides text-light-X ???
