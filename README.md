@@ -35,7 +35,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-## Question
+## Questions
 
 - ~~Why there are yellow highlights in globals.css -> They may be warnings and not cause issues~~
 - How are the styles applied in the code?
@@ -46,3 +46,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 - Refactor: Have only one metadata
 - Create our own Weave icon
 - Who provides text-light-X ???
+- After knowing more about React: Replace Clerk functionalities with own
+- Check how next.config.ts works behind the scenes
+- Check ShadCN, Uploadthing.
