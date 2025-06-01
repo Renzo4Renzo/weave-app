@@ -49,3 +49,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 - After knowing more about React: Replace Clerk functionalities with own
 - Check how next.config.ts works behind the scenes
 - Check ShadCN, Uploadthing.
+- Page is not loading the newest values, after the upsert in onboarding is done.
