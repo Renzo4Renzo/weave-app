@@ -29,12 +29,12 @@ export function formatDateString(dateString: string) {
   return `${time} - ${formattedDate}`;
 }
 
-export function formatThreadCount(count: number): string {
+export function formatWeaveCount(count: number): string {
   if (count === 0) {
-    return "No Threads";
+    return "No Weaves";
   } else {
-    const threadCount = count.toString().padStart(2, "0");
-    const threadWord = count === 1 ? "Thread" : "Threads";
-    return `${threadCount} ${threadWord}`;
+    const weaveCount = count.toString().padStart(2, "0");
+    const weaveWord = count === 1 ? "Weave" : "Weaves";
+    return `${weaveCount} ${weaveWord}`;
   }
 }
