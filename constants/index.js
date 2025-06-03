@@ -16,8 +16,8 @@ export const sidebarLinks = [
   },
   {
     imgURL: "/assets/create.svg",
-    route: "/create-weave",
-    label: "Create Weave",
+    route: "/create-wisp",
+    label: "Create Wisp",
   },
   {
     imgURL: "/assets/community.svg",
@@ -32,13 +32,13 @@ export const sidebarLinks = [
 ];
 
 export const profileTabs = [
-  { value: "weaves", label: "Weaves", icon: "/assets/reply.svg" },
+  { value: "wisps", label: "Wisps", icon: "/assets/reply.svg" },
   { value: "replies", label: "Replies", icon: "/assets/members.svg" },
   { value: "tagged", label: "Tagged", icon: "/assets/tag.svg" },
 ];
 
 export const communityTabs = [
-  { value: "weaves", label: "Weaves", icon: "/assets/reply.svg" },
+  { value: "wisps", label: "Wisps", icon: "/assets/reply.svg" },
   { value: "members", label: "Members", icon: "/assets/members.svg" },
   { value: "requests", label: "Requests", icon: "/assets/request.svg" },
 ];

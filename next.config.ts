@@ -23,6 +23,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "placehold.co",
       },
+      {
+        protocol: "https",
+        hostname: "ggll9bnohd.ufs.sh",
+      },
     ],
   },
   typescript: {

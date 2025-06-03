@@ -29,12 +29,12 @@ export function formatDateString(dateString: string) {
   return `${time} - ${formattedDate}`;
 }
 
-export function formatWeaveCount(count: number): string {
+export function formatWispCount(count: number): string {
   if (count === 0) {
-    return "No Weaves";
+    return "No Wisps";
   } else {
-    const weaveCount = count.toString().padStart(2, "0");
-    const weaveWord = count === 1 ? "Weave" : "Weaves";
-    return `${weaveCount} ${weaveWord}`;
+    const wispCount = count.toString().padStart(2, "0");
+    const wispWord = count === 1 ? "Wisp" : "Wisps";
+    return `${wispCount} ${wispWord}`;
   }
 }
