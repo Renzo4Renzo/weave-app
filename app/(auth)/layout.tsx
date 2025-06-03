@@ -3,7 +3,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
 
 export const metadata = {
-  title: "Wisp",
+  title: "Wisps",
   description: "A Next.js text-based conversation app",
 };
 

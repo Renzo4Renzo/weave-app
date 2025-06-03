@@ -7,7 +7,7 @@ import RightSidebar from "@/components/shared/RightSidebar";
 import Bottombar from "@/components/shared/Bottombar";
 
 export const metadata = {
-  title: "Wisp",
+  title: "Wisps",
   description: "A Next.js text-based conversation app",
 };
 
