@@ -52,3 +52,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 - Page is not loading the newest values, after the upsert in onboarding is done.
 - CHALLENGE: Implement LIKE functionality
 - ~~Is "Weaves" the best possible name? -> Renamed to Wisps~~
+- No Unit Tests here
+- Learn how Tailwind works
