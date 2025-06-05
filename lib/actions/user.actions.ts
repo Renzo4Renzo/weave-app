@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { User } from "../models/user.model";
 import { connectToDB } from "../mongoose";
 import { Wisp } from "../models/wisp.model";
+import { FilterQuery, SortOrder } from "mongoose";
 
 interface UpsertUserParams {
   userId: string;
@@ -12,6 +13,14 @@ interface UpsertUserParams {
   image: string;
   path: string;
   bio?: string;
+}
+
+interface GetUserParams {
+  userId: string;
+  searchString: string;
+  pageNumber: number;
+  pageSize: number;
+  sortBy?: SortOrder;
 }
 
 export async function upsertUser(params: UpsertUserParams): Promise<void> {
@@ -62,5 +71,43 @@ export async function getUserWisps(userId: string) {
     return wisps;
   } catch (error: any) {
     throw new Error(`Failed to get user: ${error.message}`);
+  }
+}
+
+export async function getUsers({
+  userId,
+  searchString = "",
+  pageNumber = 1,
+  pageSize = 20,
+  sortBy = "desc",
+}: GetUserParams) {
+  try {
+    connectToDB();
+
+    const skipAmount = (pageNumber - 1) * pageSize;
+
+    const regex = new RegExp(searchString, "i");
+
+    const query: FilterQuery<typeof User> = {
+      id: { $ne: userId },
+    };
+
+    if (searchString.trim() !== "") {
+      query.$or = [{ username: { $regex: regex } }, { name: { $regex: regex } }];
+    }
+
+    const sortOptions = { createdAt: sortBy };
+
+    const usersQuery = User.find(query).sort(sortOptions).skip(skipAmount).limit(pageSize);
+
+    const totalUsersCount = await User.countDocuments(query);
+
+    const users = await usersQuery.exec();
+
+    const isNext = totalUsersCount > skipAmount + users.length;
+
+    return { users, isNext };
+  } catch (error: any) {
+    throw new Error(`Failed to get users: ${error.message}`);
   }
 }
