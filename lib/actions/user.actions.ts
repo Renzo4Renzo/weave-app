@@ -111,3 +111,28 @@ export async function getUsers({
     throw new Error(`Failed to get users: ${error.message}`);
   }
 }
+
+export async function getActivity(userId: string) {
+  try {
+    connectToDB();
+
+    //Find all wisps created by the user
+    const userWisps = await Wisp.find({ author: userId });
+
+    //Collect all the child wisp ids (replies) from the 'children'
+    const childWispsIDs = userWisps.reduce((acc, userWisp) => {
+      return acc.concat(userWisp.children);
+    }, []);
+
+    // Get replies from other accounts
+    const replies = await Wisp.find({ _id: { $in: childWispsIDs }, author: { $ne: userId } }).populate({
+      path: "author",
+      model: User,
+      select: "name image _id",
+    });
+
+    return replies;
+  } catch (error: any) {
+    throw new Error(`Failed to get activity: ${error.message}`);
+  }
+}

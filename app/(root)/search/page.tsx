@@ -1,12 +1,7 @@
 import { getUser, getUsers } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import Image from "next/image";
 import UserCard from "@/components/cards/UserCard";
-
-interface ProfileParams {
-  params: { id: string };
-}
 
 export default async function Page() {
   const user = await currentUser();
