@@ -1,10 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // experimental: {
-  //   serverActions: {},
-  //   serverComponentsExternalPackages: ["mongoose"],
-  // },
   images: {
     remotePatterns: [
       {
