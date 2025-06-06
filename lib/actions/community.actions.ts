@@ -70,11 +70,11 @@ export async function fetchCommunityDetails(id: string) {
   }
 }
 
-export async function fetchCommunityPosts(id: string) {
+export async function fetchCommunityWisps(id: string) {
   try {
     connectToDB();
 
-    const communityPosts = await Community.findById(id).populate({
+    const communityWisps = await Community.findById(id).populate({
       path: "wisps",
       model: Wisp,
       populate: [
@@ -95,10 +95,10 @@ export async function fetchCommunityPosts(id: string) {
       ],
     });
 
-    return communityPosts;
+    return communityWisps;
   } catch (error) {
     // Handle any errors
-    console.error("Error fetching community posts:", error);
+    console.error("Error fetching community wisps:", error);
     throw error;
   }
 }

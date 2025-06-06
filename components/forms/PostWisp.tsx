@@ -7,6 +7,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePathname, useRouter } from "next/navigation";
+import { useOrganization } from "@clerk/nextjs";
 
 import { WispValidation } from "@/lib/validations/wisp";
 import { createWisp } from "@/lib/actions/wisp.actions";
@@ -14,6 +15,7 @@ import { createWisp } from "@/lib/actions/wisp.actions";
 export function PostWisp({ userId }: { userId: string }) {
   const router = useRouter();
   const pathname = usePathname();
+  const { organization: org } = useOrganization();
 
   const form = useForm({
     resolver: zodResolver(WispValidation),
@@ -24,7 +26,12 @@ export function PostWisp({ userId }: { userId: string }) {
   });
 
   const onSubmit = async (values: z.infer<typeof WispValidation>) => {
-    await createWisp({ text: values.wisp, authorId: userId, communityId: null, path: pathname });
+    await createWisp({
+      text: values.wisp,
+      authorId: userId,
+      communityId: org?.id || null,
+      path: pathname,
+    });
 
     router.push("/");
   };

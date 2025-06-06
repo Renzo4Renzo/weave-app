@@ -1,6 +1,7 @@
 import { getUserWisps } from "@/lib/actions/user.actions";
 import { redirect } from "next/navigation";
 import { WispCard } from "../cards/WispCard";
+import { fetchCommunityWisps } from "@/lib/actions/community.actions";
 
 interface WispsTabProps {
   currentUserId: string;
@@ -9,7 +10,13 @@ interface WispsTabProps {
 }
 
 export default async function WispsTab({ currentUserId, accountId, accountType }: WispsTabProps) {
-  let result = await getUserWisps(currentUserId);
+  let result: any;
+
+  if (accountType === "Community") {
+    result = await fetchCommunityWisps(accountId);
+  } else {
+    result = await getUserWisps(accountId);
+  }
 
   if (!result) {
     redirect("/");

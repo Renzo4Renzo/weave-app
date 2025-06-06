@@ -54,3 +54,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 - ~~Is "Weaves" the best possible name? -> Renamed to Wisps~~
 - No Unit Tests here
 - Learn how Tailwind works
+- Why I see the home page instead of the sign-in page when hitting the URL and not logged?
+- Switch Communities to work natively instead of using Clerk

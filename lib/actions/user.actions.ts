@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { User } from "../models/user.model";
+import { Community } from "../models/community.model";
 import { connectToDB } from "../mongoose";
 import { Wisp } from "../models/wisp.model";
 import { FilterQuery, SortOrder } from "mongoose";
@@ -23,36 +24,36 @@ interface GetUserParams {
   sortBy?: SortOrder;
 }
 
-export async function upsertUser(params: UpsertUserParams): Promise<void> {
+export async function getUser(userId: string) {
   try {
     connectToDB();
+    return await User.findOne({ id: userId }).populate({ path: "communities", model: Community });
+  } catch (error: any) {
+    throw new Error(`Failed to get user: ${error.message}`);
+  }
+}
+
+export async function upsertUser({ userId, username, name, image, path, bio }: UpsertUserParams): Promise<void> {
+  try {
+    connectToDB();
+
     await User.findOneAndUpdate(
-      { id: params.userId },
+      { id: userId },
       {
-        username: params.username.toLowerCase(),
-        name: params.name,
-        bio: params.bio,
-        image: params.image,
+        username: username.toLowerCase(),
+        name,
+        bio,
+        image,
         onboarded: true,
       },
       { upsert: true }
     );
 
-    if (params.path === "/profile/edit") {
-      revalidatePath(params.path);
+    if (path === "/profile/edit") {
+      revalidatePath(path);
     }
   } catch (error: any) {
     throw new Error(`Failed to upsert user: ${error.message}`);
-  }
-}
-
-export async function getUser(userId: string) {
-  try {
-    connectToDB();
-    return await User.findOne({ id: userId });
-    // populate({ path: "communities", model: Community });
-  } catch (error: any) {
-    throw new Error(`Failed to get user: ${error.message}`);
   }
 }
 
@@ -61,11 +62,25 @@ export async function getUserWisps(userId: string) {
     connectToDB();
 
     //Find all wisps authored by user with the given userId
-    //TODO: Populate community
     const wisps = await User.findOne({ id: userId }).populate({
       path: "wisps",
       model: Wisp,
-      populate: { path: "children", model: Wisp, populate: { path: "author", model: User, select: "name image id" } },
+      populate: [
+        {
+          path: "community",
+          model: Community,
+          select: "name id image _id", // Select the "name" and "_id" fields from the "Community" model
+        },
+        {
+          path: "children",
+          model: Wisp,
+          populate: {
+            path: "author",
+            model: User,
+            select: "name image id", // Select the "name" and "_id" fields from the "User" model
+          },
+        },
+      ],
     });
 
     return wisps;
